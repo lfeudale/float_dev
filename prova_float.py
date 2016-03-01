@@ -15,7 +15,6 @@ modelvarname='P_i'
 Profilelist=bio_float.FloatSelector(FLOATVARS[modelvarname],TI,reg)
 
 
-#T2 = TimeInterval('20150501','20150601','%Y%m%d')
 T2 = TimeInterval('20150501','20160215','%Y%m%d')
 reg2=Rectangle(10,20,30,40)
 Profilelist_2 = bio_float.FloatSelector('CHLA',T2,reg2)
@@ -123,14 +122,11 @@ for k in range(0,ndist):
 #    Ddist[k] = np.arccos(np.sin(Llat[k])*np.sin(Llat[k+1]) + np.cos(Llat[k])*np.cos(Llat[k+1])* np.cos(np.abs(Llon[k+1]-Llon[k])))*6371
     Ddist[k] = np.arccos(np.sin(Llat[k])*np.sin(Llat[k+1]) + np.cos(Llat[k])*np.cos(Llat[k+1])* np.cos(np.abs(Llon[k+1]-Llon[k])))*RR
 
-#    Dtime[k] = Timelist[k+1].day-Timelist[k].day
     Dtime = Timelist[k+1]-Timelist[k]
-#    Dt[k]=(Dtime.days*86400 + Dtime.seconds)/86400.
     Dt[k]=(Dtime.days*86400 + Dtime.seconds)/3600.
 out_file = open("test.txt","w")
 out_file.write("distance in km: , Ddist[k], and hours between the two records: ,Dt[k] , Lon=,LonlistD[k], to ,LonlistD[k+1],; Lat=,LatlistD[k], to ,LatlistD[k+1], \n")
 out_file.close()
-#    print "distance in km: ", Ddist[k], "and hours between the two records: ",Dt[k] , "Lon=",LonlistD[k]," to ",LonlistD[k+1],"; Lat=",LatlistD[k]," to ",LatlistD[k+1]
 
 print "distance in km: ", Ddist, "and days between the two records: ",Dt
 
@@ -138,7 +134,7 @@ print "distance in km: ", Ddist, "and days between the two records: ",Dt
 for pp, p in enumerate(Profilelist_2): print pp, p._my_float.wmo , p._my_float.cycle
 
 for pp, p in enumerate(Profilelist_2): print pp, p._my_float.wmo , p._my_float.cycle ,p._my_float.lon , p._my_float.lat , p._my_float.time
-# 102 6901768 62 18.6155 37.6098 2016-01-14 10:34:00
+# 102
 F1=Profilelist[102]._my_float
 Pres,Prof,Prof_adj,Qc=F1.read_very_raw('CHLA')
 F1.plot(Pres,Prof)
